@@ -8,12 +8,12 @@
   <body>
     <div id="floating-panel">
       <div class="group">
-          <div class="subject">Radius <span id=radiusNum>21</span></div>
+          <div class="subject">Radius <span id=radiusNum>30</span></div>
           <button onclick="changeRadius(true)">Up</button>
           <button onclick="changeRadius(false)">Down</button>
       </div>
       <div class="group">
-          <div class="subject">Intensity <span id=intensityNum>200</span></div>
+          <div class="subject">Intensity <span id=intensityNum>0</span></div>
           <button onclick="changeIntensity(true)">Up</button>
           <button onclick="changeIntensity(false)">Down</button>
       </div>
@@ -26,20 +26,20 @@
     <div id="map"></div>
     
     <script>
-      const maxI = 200, rad = 21, opac = .6;
+      const maxI = 0, rad = 30, opac = .6;
       var map, heatmap;
 
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 2,
-          center: {lat: 37.775, lng: -122.434},
-          mapTypeId: 'roadmap'
+          zoom: 10,
+          center: {lat: 42.995301, lng: -78.188046},
+          mapTypeId: 'satellite'
         });
 
         fetch('static/location.json').then(function(response) {
           response.json().then(function(result) {
             let locations = result.locations.map((val) => {
-              return new google.maps.LatLng(val.latitudeE7 * (10 ** -7), val.longitudeE7 * (10 ** -7));
+              return new google.maps.LatLng(val.latitude, val.longitude);
             })
 
             heatmap = new google.maps.visualization.HeatmapLayer({
@@ -100,7 +100,7 @@
       }
 
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY_HERE&libraries=visualization&callback=initMap">
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAlDNjNQPaP6oK68ZUnRvEwReD4wLKKgKI&libraries=visualization&callback=initMap">
     </script>
   </body>
 </html>
